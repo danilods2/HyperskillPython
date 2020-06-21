@@ -6,8 +6,17 @@ Pouring coffee into the cup
 Pouring some milk into the cup
 Coffee is ready!""")
 
+water = int(input("Write how many ml of water the coffee machine has: ")) / 200
+milk = int(input("Write how many ml of milk the coffee machine has: ")) / 50
+beans = int(input("Write how many grams of coffee beans the coffee machine has: ")) / 15
 coffee = int(input("Write how many cups of coffee you will need: "))
-print("""For {} cups  of coffee you will need:
-{} ml of water
-{} ml of milk
-{} g of coffee beans""".format(coffee, coffee * 200, coffee * 50, coffee * 15))
+supply = int(min(water, milk, beans))
+
+print(supply)
+
+if supply < coffee:
+    print("No, I can make only {} cups of coffee".format(supply))
+elif supply == coffee:
+    print("Yes, I can make that amount of coffee")
+elif supply > coffee:
+    print("Yes, I can make that amount of coffee (and even {} more than that)".format((supply - coffee)))
