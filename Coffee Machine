@@ -1,0 +1,13 @@
+print("""Starting to make a coffee
+Grinding coffee beans
+Boiling water
+Mixing boiled water with crushed coffee beans
+Pouring coffee into the cup
+Pouring some milk into the cup
+Coffee is ready!""")
+
+coffee = int(input("Write how many cups of coffee you will need: "))
+print("""For {} cups  of coffee you will need:
+{} ml of water
+{} ml of milk
+{} g of coffee beans""".format(coffee, coffee * 200, coffee * 50, coffee * 15))
