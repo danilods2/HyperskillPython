@@ -4,35 +4,6 @@ beans = 120
 cups = 9
 cash = 550
 
-status = """
-The coffee machine has:
-
-{} of water
-{} of milk
-{} of coffee beans
-{} of disposable cups
-{} of money
-""".format(water, milk, beans, cups, cash)
-
-def starter(x):  # takes commands
-    global water
-    global milk
-    global cups
-    global beans
-    global cash
-    if x == "buy":
-        buy()
-    elif x == "fill":
-        water += int(input("Write how many ml of water do you want to add:\n"))
-        milk += int(input("Write how many ml of milk do you want to add:\n"))
-        beans += int(input("Write how many grams of coffee beans do you want to add:\n"))
-        cups += int(input("Write how many disposable cups do you want to add:\n"))
-    elif x == "take":
-        print("I gave you {} euros".format(cash))
-        cash = 0
-        print(cash)
-
-
 def buy():
     x = int(input("What do you want to buy? \n1 - espresso\n2 - latte\n3 - cappuccino\n"))
     global water
@@ -55,8 +26,40 @@ def buy():
         milk -= 100
         beans -= 12
         cash += 6
+    else:
+        print("Incorrect command. Try again")
+        cups += 1
+        buy()
     print("There you go. Enjoy your coffee!")
+    greeting()
 
-print(status)
-starter(input("Write action (buy, fill, take):\n"))
-print(status)
+def starter(x):
+    if x == "buy":
+        buy()
+    elif x == "fill":
+        global water
+        water += int(input("Write how many ml of water do you want to add: "))
+        global milk
+        milk += int(input("Write how many ml of milk do you want to add: "))
+        global beans
+        beans += int(input("Write how many grams of coffee beans do you want to add: "))
+        global cups
+        cups += int(input("Write how many disposable cups do you want to add: "))
+    elif x == "take":
+        global cash
+        print("You withdrew {} euros".format(cash))
+        cash = 0
+    else:
+        print("Incorrect command. Try again")
+    greeting()
+
+def greeting():
+    print("""The coffee machine has:
+    {}ml of water
+    {}ml of milk
+    {}g of coffee beans
+    {} disposable cups
+    {}€""".format(water, milk, beans, cups, cash))
+    starter(input("Write action: #buy, #fill, #take \n"))
+
+greeting()
