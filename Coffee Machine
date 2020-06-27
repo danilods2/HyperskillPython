@@ -7,29 +7,30 @@ cash = 550
 status = """
 The coffee machine has:
 
-{}ml of water
-{}ml of milk
-{}g of coffee beans
-{} disposable cups
-{}€
+{} of water
+{} of milk
+{} of coffee beans
+{} of disposable cups
+{} of money
 """.format(water, milk, beans, cups, cash)
 
 def starter(x):  # takes commands
+    global water
+    global milk
+    global cups
+    global beans
+    global cash
     if x == "buy":
         buy()
     elif x == "fill":
-        global water
         water += int(input("Write how many ml of water do you want to add:\n"))
-        global milk
         milk += int(input("Write how many ml of milk do you want to add:\n"))
-        global beans
         beans += int(input("Write how many grams of coffee beans do you want to add:\n"))
-        global cups
         cups += int(input("Write how many disposable cups do you want to add:\n"))
     elif x == "take":
-        global cash
-        print("You withdrew {} euros".format(cash))
+        print("I gave you {} euros".format(cash))
         cash = 0
+        print(cash)
 
 
 def buy():
