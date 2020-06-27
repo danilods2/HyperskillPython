@@ -1,22 +1,65 @@
-print("""Starting to make a coffee
-Grinding coffee beans
-Boiling water
-Mixing boiled water with crushed coffee beans
-Pouring coffee into the cup
-Pouring some milk into the cup
-Coffee is ready!""")
+water = 400
+milk = 540
+beans = 120
+cups = 9
+cash = 550
 
-water = int(input("Write how many ml of water the coffee machine has: ")) / 200
-milk = int(input("Write how many ml of milk the coffee machine has: ")) / 50
-beans = int(input("Write how many grams of coffee beans the coffee machine has: ")) / 15
-coffee = int(input("Write how many cups of coffee you will need: "))
-supply = int(min(water, milk, beans))
+def buy():
+    x = int(input("What do you want to buy? \n1 - espresso\n2 - latte\n3 - cappuccino\n"))
+    global water
+    global milk
+    global cups
+    global beans
+    global cash
+    cups -= 1
+    if x == 1:
+        water -= 250
+        beans -= 16
+        cash += 4
+    elif x == 2:
+        water -= 350
+        milk -= 75
+        beans -= 20
+        cash += 7
+    elif x == 3:
+        water -= 200
+        milk -= 100
+        beans -= 12
+        cash += 6
+    else:
+        print("Incorrect command. Try again")
+        cups += 1
+        buy()
+    print("There you go. Enjoy your coffee!")
+    greeting()
 
-print(supply)
+def starter(x):
+    if x == "buy":
+        buy()
+    elif x == "fill":
+        global water
+        water += int(input("Write how many ml of water do you want to add: "))
+        global milk
+        milk += int(input("Write how many ml of milk do you want to add: "))
+        global beans
+        beans += int(input("Write how many grams of coffee beans do you want to add: "))
+        global cups
+        cups += int(input("Write how many disposable cups do you want to add: "))
+    elif x == "take":
+        global cash
+        print("You withdrew {} euros".format(cash))
+        cash = 0
+    else:
+        print("Incorrect command. Try again")
+    greeting()
 
-if supply < coffee:
-    print("No, I can make only {} cups of coffee".format(supply))
-elif supply == coffee:
-    print("Yes, I can make that amount of coffee")
-elif supply > coffee:
-    print("Yes, I can make that amount of coffee (and even {} more than that)".format((supply - coffee)))
+def greeting():
+    print("""The coffee machine has:
+    {}ml of water
+    {}ml of milk
+    {}g of coffee beans
+    {} diposable cups
+    {}€""".format(water, milk, beans, cups, cash))
+    starter(input("Write action: #buy, #fill, #take \n"))
+
+greeting()
