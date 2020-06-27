@@ -4,17 +4,17 @@ beans = 120
 cups = 9
 cash = 550
 
-def greeting():
-    print("""The coffee machine has:
-    {}ml of water
-    {}ml of milk
-    {}g of coffee beans
-    {} disposable cups
-    {}€
-    """.format(water, milk, beans, cups, cash))
-    starter(input("Write action: #buy, #fill, #take \n"))
+status = """
+The coffee machine has:
 
-def starter(x):
+{}ml of water
+{}ml of milk
+{}g of coffee beans
+{} disposable cups
+{}€
+""".format(water, milk, beans, cups, cash)
+
+def starter(x):  # takes commands
     if x == "buy":
         buy()
     elif x == "fill":
@@ -30,9 +30,7 @@ def starter(x):
         global cash
         print("You withdrew {} euros".format(cash))
         cash = 0
-    else:
-        print("Incorrect command. Try again")
-    greeting()
+
 
 def buy():
     x = int(input("What do you want to buy? \n1 - espresso\n2 - latte\n3 - cappuccino\n"))
@@ -56,11 +54,8 @@ def buy():
         milk -= 100
         beans -= 12
         cash += 6
-    else:
-        print("Incorrect command. Try again")
-        cups += 1
-        buy()
     print("There you go. Enjoy your coffee!")
-    greeting()
 
-greeting()
+print(status)
+starter(input("Write action (buy, fill, take):\n"))
+print(status)
