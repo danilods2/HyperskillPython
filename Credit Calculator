@@ -1,0 +1,29 @@
+from math import log
+
+user_input = input("What do you want to calculate?\ntype 'n' for the count of months,\ntype 'a' for the annuity monthly payment,\ntype 'p' for the credit principal:\n")
+
+if user_input == "n":
+    credit_principal = int(input("Enter the credit principal: "))
+    monthly_payment = int(input("Enter the monthly payment: "))
+    interest = int(input("Enter the credit interest: "))
+    period_log = monthly_payment / (monthly_payment - (interest * credit_principal))
+    period_base = 1 + interest
+    periods = log(period_log, period_base)
+    if periods < 12:
+        print(f"You need {periods} months to repay this credit!")
+    elif periods % 12 == 0:
+        print(f"You need {periods} years to repay this credit!")
+    else:
+        print(f"You need {periods} years and {periods} months to repay this credit!")
+elif user_input == "p":
+    monthly_payment = int(input("Enter the monthly payment: "))
+    periods = int(input("Enter the credit principal: "))
+    interest = int(input("Enter the credit interest: "))
+    credit_principal = monthly_payment / ((interest * ((1 + interest) ** periods)) / ((1 + interest) ** interest) - 1)
+    print(f"Your credit principal = {credit_principal}!")
+elif user_input == "a":
+    credit_principal = int(input("Enter the credit principal: "))
+    periods = int(input("Enter the number of periods: "))
+    interest = int(input("Enter the credit interest: "))
+    monthly_payment = credit_principal * ((interest * (1 + interest) ** periods) / ((1 + interest) ** periods) - 1)
+    print(f"Your annuity payment is {monthly_payment}!")
